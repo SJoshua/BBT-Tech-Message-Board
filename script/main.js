@@ -179,7 +179,6 @@ function newpost() {
 function deletePost(id) {
 	$.get("/api/action.php?method=delete&id=" + id, function(data, status) {
 		if (status == "success") {
-			alert(data);
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {
 				updatePosts();
