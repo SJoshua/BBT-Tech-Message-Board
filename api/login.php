@@ -7,6 +7,7 @@ $ret = new StdClass();
 
 if (isset($_SESSION["user_id"])) {
 	$ret->errmsg = "You have to log out first.";
+	$ret->status = "failed";
 
 } else {
 	if (isset($_POST["username"]) && isset($_POST["password"])) {
@@ -33,6 +34,9 @@ if (isset($_SESSION["user_id"])) {
 
 	if (!isset($ret->errmsg)) {
 		$_SESSION["user_id"] = $username;
+		if ($username == "admin") {
+			$_SESSION["admin"] = true;
+		}
 		$ret->status = "ok";
 	} else {
 		$ret->status = "failed";

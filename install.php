@@ -10,6 +10,7 @@ if ($con->connect_error) {
 
 $con->query("CREATE TABLE `" . DB_NAME . "`.`user_info` ( `username` TEXT NOT NULL , `password` TEXT NOT NULL ) ENGINE = InnoDB;");
 $con->query("CREATE TABLE `" . DB_NAME . "`.`messages` ( `id` INT NOT NULL AUTO_INCREMENT , `username` TEXT NOT NULL , `content` TEXT NOT NULL , `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
+$con->query("CREATE TABLE `" . DB_NAME . "`.`comments` ( `id` INT NOT NULL AUTO_INCREMENT , `post_id` INT NOT NULL , `username` TEXT NOT NULL , `content` TEXT NOT NULL , `timestamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;");
 
 $con->close();
 
