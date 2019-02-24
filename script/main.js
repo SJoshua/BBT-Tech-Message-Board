@@ -27,7 +27,7 @@ function updatePosts(page) {
 			page = 1;
 		}
 	}
-	$.get("/api/getpost.php?page=" + page, function(data, status) {
+	$.get("api/getpost.php?page=" + page, function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {
@@ -81,7 +81,7 @@ function updatePosts(page) {
 }
 
 function updateStatus(redirect) {
-	$.get("/api/status.php", function(data, status) {
+	$.get("api/status.php", function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "guest") {
@@ -113,7 +113,7 @@ function register() {
 		password: $("#password").val(),
 		checkpwd: $("#checkpwd").val()
 	};
-	$.post("./api/register.php", info, function(data, status) {
+	$.post("api/register.php", info, function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {
@@ -134,7 +134,7 @@ function login() {
 		username: $("#username").val(),
 		password: $("#password").val()
 	};
-	$.post("./api/login.php", info, function(data, status) {
+	$.post("api/login.php", info, function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {
@@ -150,7 +150,7 @@ function login() {
 }
 
 function logout() {
-	$.get("/api/logout.php", function(data) {
+	$.get("api/logout.php", function(data) {
 		$(location).attr("href", "index.html");
 	});
 }
@@ -159,7 +159,7 @@ function newpost() {
 	var info = {
 		message: $("#message").val()
 	};
-	$.post("./api/action.php?method=submit", info, function(data, status) {
+	$.post("api/action.php?method=submit", info, function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {
@@ -177,7 +177,7 @@ function newpost() {
 }
 
 function deletePost(id) {
-	$.get("/api/action.php?method=delete&id=" + id, function(data, status) {
+	$.get("api/action.php?method=delete&id=" + id, function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {
@@ -212,7 +212,7 @@ function editPost(id) {
 	var info = {
 		message: $("#ept" + id).val()
 	};
-	$.post("./api/action.php?method=edit&id=" + id, info, function(data, status) {
+	$.post("api/action.php?method=edit&id=" + id, info, function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {
@@ -246,7 +246,7 @@ function replyPost(id) {
 	var info = {
 		message: $("#rpt" + id).val()
 	};
-	$.post("./api/action.php?method=reply&post_id=" + id, info, function(data, status) {
+	$.post("api/action.php?method=reply&post_id=" + id, info, function(data, status) {
 		if (status == "success") {
 			var ret = JSON.parse(data);
 			if (ret.status == "ok") {

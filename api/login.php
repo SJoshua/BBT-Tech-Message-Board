@@ -35,7 +35,7 @@ if (isset($_SESSION["user_id"])) {
 	if (!isset($ret->errmsg)) {
 		$_SESSION["user_id"] = $username;
 		if ($username == "admin") {
-			$_SESSION["admin"] = true;
+			$_SESSION["is_admin"] = true;
 		}
 		$ret->status = "ok";
 	} else {

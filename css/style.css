@@ -31,7 +31,12 @@ body {
 	background-color: #111;
 }
 
-.navbar #admin, #register, #login, #logout {
+.navbar #admin {
+	float: left;
+	display: none;
+}
+
+.navbar #register, #login, #logout {
 	float: right;
 	display: none;
 }
