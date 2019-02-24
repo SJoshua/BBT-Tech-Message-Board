@@ -1,0 +1,59 @@
+body {
+	margin: 0;
+	background-color: #f3f3f3;
+	font-family: Arial, sans-serif;
+}
+
+.navbar {
+	overflow: hidden;
+	background-color: #333;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0;
+}
+
+.navbar a {
+	float: left;
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 16px;
+	text-decoration: none;
+}
+
+.navbar p {
+	float: right;
+	color: white;
+	margin-right: 15px;
+}
+
+.navbar a:hover {
+	background-color: #111;
+}
+
+.navbar #admin, #register, #login, #logout {
+	float: right;
+	display: none;
+}
+
+.navbar .active {
+	background-color: #4d90fe;
+}
+
+#notice {
+	color: red;
+}
+
+.interaction {
+    padding: 150px 0;
+    text-align: center;
+}
+
+#newpost {
+	display: none;
+    text-align: center;
+}
+
+#view {
+	padding-left: 100px;
+}

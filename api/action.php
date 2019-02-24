@@ -1,12 +1,16 @@
 <?php
-require_once("config.php");
+require_once("../config.php");
 
 session_start();
 
+$ret = new StdClass();
+
 if (!isset($_SESSION["user_id"])) {
-	header('Location: login.php');
+	$ret->errmsg = "You have to log in first.";
+	
 } else {
 	$con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+	
 	if ($con->connect_error) {
 		die("Failed to access database: " . $con->connect_error);
 	}
@@ -15,7 +19,7 @@ if (!isset($_SESSION["user_id"])) {
 	
 	if ($_GET["thread"] == "submit") {
 		if (!isset($_POST["message"])) {
-			$errmsg = "No message.";
+			$ret->errmsg = "No message.";
 		} else {			
 			$content = htmlspecialchars($_POST["message"], ENT_QUOTES);
 			
@@ -27,15 +31,15 @@ if (!isset($_SESSION["user_id"])) {
 		
 	} elseif ($_GET["thread"] == "edit") {
 		if (!isset($_GET["id"])) {
-			$errmsg = "No message id specified.";
+			$ret->errmsg = "No message id specified.";
 		} else if (!isset($_POST["message"])) {
-			$errmsg = "No message.";
+			$ret->errmsg = "No message.";
 		} else {
 			$id = $_GET["id"];
 			$res = $con->query("select * from messages where username='$username' and id='$id'");
 			
 			if (empty($res->num_rows)) {
-				$errmsg = "Not found.";
+				$ret->errmsg = "Not found.";
 			} else {
 				$content = htmlspecialchars($_POST["message"], ENT_QUOTES);
 				
@@ -48,26 +52,26 @@ if (!isset($_SESSION["user_id"])) {
 		
 	} elseif ($_GET["thread"] == "delete") {
 		if (!isset($_GET["id"])) {
-			$errmsg = "No message id specified.";
+			$ret->errmsg = "No message id specified.";
 		} else {
 			$id = $_GET["id"];
 			$res = $con->query("select * from messages where username='$username' and id='$id'");
 			
 			if (empty($res->num_rows)) {
-				$errmsg = "Not found.";
+				$ret->errmsg = "Not found.";
 			} else {
 				$con->query("delete from messages where id='$id'");
 			}
 		}
 		
 	} else {
-		$errmsg = "Thread not specified.";
+		$ret->errmsg = "Thread not specified.";
 	}
 	
 	$con->close();
 	
-	if (isset($errmsg)) {
-		die($errmsg);
+	if (isset($ret->errmsg)) {
+		die($ret->errmsg);
 	}
 	
 	header('Location: index.php');

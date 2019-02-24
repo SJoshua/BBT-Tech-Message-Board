@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title> Message Board </title>
+		<link type="text/css" rel="stylesheet" href="./css/style.css">
+		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="./script/main.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("form").submit(function(e) {
+					e.preventDefault();
+					login();
+				});
+			});
+		</script>
+	</head>
+	<body onload="updateStatus(true);">
+		<div class="navbar">
+			<a href="index.html"> Index </a>
+			<a id="admin" href="admin.html"> Admin </a>
+			<a id="logout" href="api/logout.php"> Logout </a>
+			<a class="active" id="login" href="login.html"> Login </a>
+			<a id="register" href="register.html"> Register </a>
+			<p id="info"> Welcome. </p>
+		</div>
+
+		<form class="interaction" action="#" method="post">
+			<h1> Message Board - Login </h1>
+			<div id="notice"></div>
+			<br>
+			<label for="username"> Username </label>
+			<input id="username" name="username" placeholder="Username" required autofocus>
+			<br>
+			<label for="password"> Password </label>
+			<input id="password" type="password" name="password" placeholder="Password" required>
+			<br>
+			<button type="submit"> Login </button>
+		</form>
+	</body>
+</html>
