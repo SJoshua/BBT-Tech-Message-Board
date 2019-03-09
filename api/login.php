@@ -22,11 +22,17 @@ if (isset($_SESSION["user_id"])) {
 			if ($con->connect_error) {
 				die("Failed to access database: " . $con->connect_error);
 			}
-			$res = $con->query("select * from user_info where username='$username' and password='$enc_pwd'");
-			$con->close();
-			if (empty($res->num_rows)) {
-				$ret->errmsg = "Either this account doesn't exist or the password is incorrect.";
+			$stmt = $con->prepare("select * from user_info where username=? and password=?");
+			
+			$stmt->bind_param("ss", $username, $enc_pwd);
+
+			if ($stmt->execute()) {
+				if (!$stmt->fetch()) {
+					$ret->errmsg = "Either this account doesn't exist or the password is incorrect.";
+				}
 			}
+			$stmt->close();
+			$con->close();
 		}
 	} else {
 		$ret->errmsg = "Incomplete information.";
